@@ -1,0 +1,7 @@
+name: RTUPersonalDifficulty
+version: '${version}'
+main: com.github.ipecter.rtu.personaldifficulty.RTUPersonalDifficulty
+api-version: 1.13
+softdepend: [ PlaceholderAPI ]
+authors: [ IPECTER (이팩터), Coll1234567 (Original) ]
+description: RTU PLUGINS - Per Player Difficulty Plugin

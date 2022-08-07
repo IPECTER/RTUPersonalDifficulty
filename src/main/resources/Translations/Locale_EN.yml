@@ -1,0 +1,6 @@
+#if Empty, Plugin uses default prefix
+prefix: ""
+reloadMsg: "&aCompleted reloading config"
+commandWrongUsage: "&cWrong Usage&7, &fUse /rtube &f{difficulties}"
+commandWrongUsageOp: "&cWrong Usage&7, &fUse /rtucc &freload&7/&f{difficulties}"
+noPermission: "&cYou don't have permission"
