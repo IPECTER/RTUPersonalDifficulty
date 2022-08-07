@@ -122,7 +122,7 @@ public class ConfigManager {
 
     private void initDfficult(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        for (String group : config.getConfigurationSection("commands").getKeys(false)) {
+        for (String group : config.getConfigurationSection("difficulties").getKeys(false)) {
 
         }
     }

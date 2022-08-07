@@ -1,6 +1,5 @@
 package com.github.ipecter.rtu.personaldifficulty;
 
-import com.github.ipecter.rtu.personaldifficulty.commands.Command;
 import com.github.ipecter.rtu.personaldifficulty.listeners.PlayerJoin;
 import com.github.ipecter.rtu.personaldifficulty.manager.ConfigManager;
 import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
@@ -33,13 +32,10 @@ public final class RTUPersonalDifficulty extends JavaPlugin {
     }
 
     protected void registerEvent() {
-        Bukkit.getPluginManager().registerEvents(new PlayerCommandSend(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerCommandPreprocess(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
     }
 
     protected void setExecutor() {
-        getCommand("rtupd").setExecutor(new Command());
     }
 
     private void loadDependencies() {
