@@ -32,7 +32,7 @@ public class DifficultyManager {
         UUID uuid = player.getUniqueId();
         Difficulty difficulty = playerCache.get(uuid);
         if (difficulty == null) {
-            String value = RTUUtilAPI.getStatusManager().getStatus(player, "player_difficulty");
+            String value = RTUUtilAPI.getStatusManager().getStatus(player, "difficulty");
             int index = value != null ? Integer.valueOf(value) : defaultDifficulty;
             difficulty = difficulties.get(index);
             playerCache.put(uuid, difficulty);
@@ -44,7 +44,7 @@ public class DifficultyManager {
         if (value >= difficulties.size())
             throw new IllegalArgumentException("A difficulty with value " + value + " is not registered");
         Difficulty difficulty = difficulties.get(value);
-        RTUUtilAPI.getStatusManager().setStatus(player, "player_difficulty", difficulty.getDifficulty());
+        RTUUtilAPI.getStatusManager().setStatus(player, "difficulty", difficulty.getDifficulty());
         playerCache.put(player.getUniqueId(), difficulty);
     }
 
