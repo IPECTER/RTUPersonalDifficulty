@@ -1,6 +1,7 @@
 package com.github.ipecter.rtu.personaldifficulty;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,10 @@ public class Difficulty {
     private String name;
 
     private String display;
+
+    private Material material;
+
+    private int customModelData;
 
     private List<String> description = new ArrayList<>();
 
@@ -69,6 +74,22 @@ public class Difficulty {
 
     public void setDisplayName(String display) {
         this.display = ChatColor.translateAlternateColorCodes('&', display);
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public int getCustomModelData() {
+        return customModelData;
+    }
+
+    public void setCustomModelData(int customModelData) {
+        this.customModelData = customModelData;
     }
 
     public List<String> getDescription() {

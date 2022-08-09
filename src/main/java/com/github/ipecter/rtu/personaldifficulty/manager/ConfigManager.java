@@ -1,16 +1,17 @@
 package com.github.ipecter.rtu.personaldifficulty.manager;
 
+import com.github.ipecter.rtu.personaldifficulty.Difficulty;
 import com.github.ipecter.rtu.personaldifficulty.RTUPersonalDifficulty;
 import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
+import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConfigManager {
 
@@ -22,7 +23,13 @@ public class ConfigManager {
     private String prefix = IridiumColorAPI.process("<GRADIENT:9ba832>[ RTUCommandControl ]</GRADIENT:a3a3a3> ");
     private String reloadMsg = "";
     private String commandWrongUsage = "";
+    private String commandWrongUsageOp = "";
+    private String commandWrongUsageConsole = "";
     private String noPermission = "";
+    private String guiTitle = "";
+    private String difficultyChanged = "";
+    private List<String> mobList = Collections.synchronizedList(new ArrayList<>());
+    private List<String> keys = Collections.synchronizedList(new ArrayList<>());
 
     public ConfigManager() {
     }
@@ -87,12 +94,54 @@ public class ConfigManager {
         this.commandWrongUsage = commandWrongUsage;
     }
 
+    private DifficultyManager manager = DifficultyManager.getInstance();
+
+    public String getCommandWrongUsageOp() {
+        return commandWrongUsageOp;
+    }
+
+    public void setCommandWrongUsageOp(String commandWrongUsageOp) {
+        this.commandWrongUsageOp = commandWrongUsageOp;
+    }
+
+    public String getCommandWrongUsageConsole() {
+        return commandWrongUsageConsole;
+    }
+
     public String getNoPermission() {
         return noPermission;
     }
 
     public void setNoPermission(String noPermission) {
         this.noPermission = noPermission;
+    }
+
+    public void setCommandWrongUsageConsole(String commandWrongUsageConsole) {
+        this.commandWrongUsageConsole = commandWrongUsageConsole;
+    }
+
+    public String getGuiTitle() {
+        return guiTitle;
+    }
+
+    public void setGuiTitle(String guiTitle) {
+        this.guiTitle = guiTitle;
+    }
+
+    public String getDifficultyChanged() {
+        return difficultyChanged;
+    }
+
+    public void setDifficultyChanged(String difficultyChanged) {
+        this.difficultyChanged = difficultyChanged;
+    }
+
+    public List<String> getMobList() {
+        return mobList;
+    }
+
+    public void setMobList(List<String> mobList) {
+        this.mobList = mobList;
     }
 
     public void initConfigFiles() {
@@ -109,12 +158,20 @@ public class ConfigManager {
         locale = config.getString("locale");
     }
 
+    public List<String> getKeys() {
+        return keys;
+    }
+
     private void initMessage(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         prefix = config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix");
         reloadMsg = config.getString("reloadMsg");
         commandWrongUsage = config.getString("commandWrongUsage");
+        commandWrongUsageOp = config.getString("commandWrongUsageOp");
+        commandWrongUsageConsole = config.getString("commandWrongUsageConsole");
         noPermission = config.getString("noPermission");
+        guiTitle = config.getString("guiTitle");
+        difficultyChanged = config.getString("difficultyChanged");
 
         RTUUtilAPI.getFileManager().copyResource("Translations", "Locale_EN.yml");
         RTUUtilAPI.getFileManager().copyResource("Translations", "Locale_KR.yml");
@@ -122,16 +179,37 @@ public class ConfigManager {
 
     private void initDfficult(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        for (String group : config.getConfigurationSection("difficulties").getKeys(false)) {
-
+        manager.setDefaultDifficulty(config.getInt("defaultDifficulty", 0));
+        ConfigurationSection difficultySection = config.getConfigurationSection("difficulties");
+        if (config.getConfigurationSection("difficulties") != null) {
+            keys = difficultySection.getKeys(false).stream().collect(Collectors.toList());
+            for (String diff : difficultySection.getKeys(false)) {
+                Difficulty difficulty = new Difficulty();
+                difficulty.setName(diff);
+                difficulty.setDisplayName(difficultySection.getString(diff + ".display", "Default Name"));
+                difficulty.setMaterial(Material.getMaterial(difficultySection.getString(diff + ".gui.material", "WHITE_STAINED_GLASS")));
+                difficulty.setCustomModelData(difficultySection.getInt(diff + ".gui.customModelData"));
+                difficulty.setDescription(difficultySection.getStringList(diff + ".gui.description"));
+                difficulty.setFallMultiplier(difficultySection.getDouble(diff + ".fallDamageMultiplier", 1.0D));
+                difficulty.setFireMultiplier(difficultySection.getDouble(diff + ".fireDamageMultiplier", 1.0D));
+                difficulty.setSuffocationMultiplier(difficultySection.getDouble(diff + ".suffocationDamageMultiplier", 1.0D));
+                difficulty.setDrowningMultiplier(difficultySection.getDouble(diff + ".drowningDamageMultiplier", 1.0D));
+                difficulty.setPvpMultiplier(difficultySection.getDouble(diff + ".PVPDamageMultiplier", 1.0D));
+                difficulty.setPveMultiplier(difficultySection.getDouble(diff + ".PVEDamageMultiplier", 1.0D));
+                difficulty.setExpMultiplier(difficultySection.getDouble(diff + ".mobExperienceMultiplier", 1.0D));
+                difficulty.setLoseHunger(difficultySection.getBoolean(diff + ".loseHunger", true));
+                difficulty.setEnableDebuffEffect(difficultySection.getBoolean(diff + ".debuffEffect", true));
+                difficulty.setMonsterIgnorePlayer(difficultySection.getBoolean(diff + ".monsterIgnorePlayer", false));
+                difficulty.setEnableCreeperExplosionDamage(difficultySection.getBoolean(diff + ".creeperExplosionDamage", true));
+                difficulty.setClearAllWhenDie(difficultySection.getBoolean(diff + ".clearAllWhenDie", false));
+                manager.registerDifficulty(difficulty);
+            }
         }
     }
 
     private void initMobList(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        for (String group : config.getConfigurationSection("list").getKeys(false)) {
-
-        }
+        mobList.addAll(config.getStringList("list"));
     }
 
     private static class InnerInstanceClass {

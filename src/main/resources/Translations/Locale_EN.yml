@@ -1,6 +1,9 @@
 #if Empty, Plugin uses default prefix
 prefix: ""
 reloadMsg: "&aCompleted reloading config"
-commandWrongUsage: "&cWrong Usage&7, &fUse /rtube &f{difficulties}"
-commandWrongUsageOp: "&cWrong Usage&7, &fUse /rtucc &freload&7/&f{difficulties}"
+commandWrongUsage: "&cWrong Usage&7, &fUse /rtupd &f{difficulties}"
+commandWrongUsageOp: "&cWrong Usage&7, &fUse /rtupd &freload&7/&f{difficulties}"
+commandWrongUsageConsole: "&cWrong Usage&7, &fThis command can only be used by Player"
 noPermission: "&cYou don't have permission"
+guiTitle: "Difficulty Menu"
+difficultyChanged: "&fYour difficulty changed to {difficulty}"

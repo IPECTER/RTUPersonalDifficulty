@@ -5,3 +5,20 @@ api-version: 1.13
 softdepend: [ PlaceholderAPI ]
 authors: [ IPECTER (이팩터), Coll1234567 (Original) ]
 description: RTU PLUGINS - Per Player Difficulty Plugin
+commands:
+  rtupd:
+    usage: /rtupd reload
+    description: /rtupd reload
+permissions:
+  rtupd.reload:
+    description: Plugin reload
+    default: op
+  rtupd.use:
+    description: Personal Difficulty Using
+    default: true
+  rtupd.toggle:
+    description: Personal Difficulty Toggle
+    default: true
+  rtupd.toggle.other:
+    description: Other Player Personal Difficulty Toggle
+    default: op

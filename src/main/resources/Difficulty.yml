@@ -1,0 +1,165 @@
+#Order Number of Difficulty
+#난이도의 순서 숫자
+defaultDifficulty: 1
+
+difficulties:
+  #Name used in command
+  #명령어로 사용되는 이름
+  #Number: 0
+  custom:
+    #Name used in GUI and Message
+    #GUI와 메세지에서 사용되는 이름
+    display: '&f&lCustom'
+    gui:
+      #Item Material in GUI
+      #GUI의 아이템 Material
+      material:
+      #Item Texture Number of CustomModelData in GUI / Empty is Default
+      #GUI의 아이템 텍스쳐 커스텀 모델 데이터 번호 / 공백이라면 기본
+      customModelData:
+      #Description used in GUI Item
+      #GUI 아이템에서 사용되는 설명
+      description:
+        - 'This is Custom Difficulty'
+        - '이것은 커스텀 난이도입니다'
+    #Fall damage multiplier
+    #낙하 데미지 배수
+    fallDamageMultiplier: 1.0
+    #Fire damage multiplier
+    #화염 데미지 배수
+    fireDamageMultiplier: 1.0
+    #Suffocation damage multiplier
+    #질식 데미지 배수
+    suffocationDamageMultiplier: 1.0
+    #Drowning damage multiplier
+    #익사 데미지 배수
+    drowningDamageMultiplier: 1.0
+    #PVP damage multiplier
+    #PVP 데미지 배수
+    PVPDamageMultiplier: 1.0
+    #PVE damage multiplier
+    #PVE 데미지 배수
+    PVEDamageMultiplier: 0.1
+    #Mob experience multiplier
+    #몹 경험치 배수
+    mobExperienceMultiplier: 1.0
+    #Whether lose hunger
+    #배고픔 손실 여부
+    loseHunger: false
+    #Whether get debuff effect (like as Minecraft Easy Difficulty)
+    #디버프 효과 적용 여부 (마인크래프트 바닐라 쉬움 난이도)
+    debuffEffect: false
+    #Whether monster ignore player / MobList.yml
+    #몬스터 플레이어 무시 여부 / MobList.yml
+    monsterIgnorePlayer: true
+    #Whether enable creeper explosion damage
+    #크리퍼 폭발 데미지 적용 여부
+    creeperExplosioDamage: false
+    #Whether enable remove all thing (item, XP) when you die
+    #사망시 모든 것(아이템, XP) 제거 여부
+    clearAllWhenDie: false
+
+  #Number: 1
+  easy:
+    display: '&a&lEasy'
+    gui:
+      material:
+      customModelData:
+      description:
+        - 'GUI will be updated soon.'
+    fallDamageMultiplier: 1.0
+    fireDamageMultiplier: 1.0
+    suffocationDamageMultiplier: 1.0
+    drowningDamageMultiplier: 1.0
+    PVPDamageMultiplier: 1.0
+    PVEDamageMultiplier: 0.25
+    mobExperienceMultiplier: 1.0
+    loseHunger: true
+    debuffEffect: false
+    monsterIgnorePlayer: false
+    creeperExplosionDamage: true
+    clearAllWhenDie: false
+
+  #Number: 2
+  normal:
+    display: '&e&lNormal'
+    gui:
+      material:
+      customModelData:
+      description:
+        - 'GUI will be updated soon.'
+    fallDamageMultiplier: 1.0
+    fireDamageMultiplier: 1.0
+    suffocationDamageMultiplier: 1.0
+    drowningDamageMultiplier: 1.0
+    PVPDamageMultiplier: 1.0
+    PVEDamageMultiplier: 0.5
+    mobExperienceMultiplier: 1.0
+    loseHunger: true
+    debuffEffect: true
+    monsterIgnorePlayer: false
+    creeperExplosionDamage: true
+    clearAllWhenDie: false
+
+  #Number: 3
+  hard:
+    display: '&c&lHard'
+    gui:
+      material:
+      customModelData:
+      description:
+        - 'GUI will be updated soon.'
+    fallDamageMultiplier: 1.0
+    fireDamageMultiplier: 1.0
+    suffocationDamageMultiplier: 1.0
+    drowningDamageMultiplier: 1.0
+    PVPDamageMultiplier: 1.0
+    PVEDamageMultiplier: 1.0
+    mobExperienceMultiplier: 1.0
+    loseHunger: true
+    debuffEffect: true
+    monsterIgnorePlayer: false
+    creeperExplosionDamage: true
+    clearAllWhenDie: false
+
+  #Number: 4
+  hardcore:
+    display: '&4&lHardcore'
+    gui:
+      material:
+      customModelData:
+      description:
+        - 'GUI will be updated soon.'
+    fallDamageMultiplier: 1.0
+    fireDamageMultiplier: 1.0
+    suffocationDamageMultiplier: 1.0
+    drowningDamageMultiplier: 1.0
+    PVPDamageMultiplier: 1.0
+    PVEDamageMultiplier: 1.0
+    mobExperienceMultiplier: 1.0
+    loseHunger: true
+    debuffEffect: true
+    monsterIgnorePlayer: false
+    creeperExplosionDamage: true
+    clearAllWhenDie: true
+
+  #Number: 5
+  peaceful:
+    display: '&b&lPeaceful'
+    gui:
+      material:
+      customModelData:
+      description:
+        - 'GUI will be updated soon.'
+    fallDamageMultiplier: 1.0
+    fireDamageMultiplier: 1.0
+    suffocationDamageMultiplier: 1.0
+    drowningDamageMultiplier: 1.0
+    PVPDamageMultiplier: 1.0
+    PVEDamageMultiplier: 0.1
+    mobExperienceMultiplier: 1.0
+    loseHunger: false
+    debuffEffect: false
+    monsterIgnorePlayer: true
+    creeperExplosionDamage: false
+    clearAllWhenDie: false
