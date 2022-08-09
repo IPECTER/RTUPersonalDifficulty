@@ -1,6 +1,7 @@
 package com.github.ipecter.rtu.personaldifficulty;
 
 import com.github.ipecter.rtu.personaldifficulty.commands.Command;
+import com.github.ipecter.rtu.personaldifficulty.gui.listeners.InventoryClick;
 import com.github.ipecter.rtu.personaldifficulty.listeners.*;
 import com.github.ipecter.rtu.personaldifficulty.manager.ConfigManager;
 import com.github.ipecter.rtu.personaldifficulty.placeholderapi.Placeholders;
@@ -41,6 +42,8 @@ public final class RTUPersonalDifficulty extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerFoodLevelChange(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerPotionEffect(), this);
+
+        Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
     }
 
     protected void setExecutor() {

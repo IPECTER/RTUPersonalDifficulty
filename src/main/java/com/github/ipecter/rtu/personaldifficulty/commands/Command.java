@@ -1,5 +1,6 @@
 package com.github.ipecter.rtu.personaldifficulty.commands;
 
+import com.github.ipecter.rtu.personaldifficulty.gui.GUIManager;
 import com.github.ipecter.rtu.personaldifficulty.manager.ConfigManager;
 import com.github.ipecter.rtu.personaldifficulty.manager.DifficultyManager;
 import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
@@ -22,13 +23,19 @@ public class Command implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+        if (!sender.hasPermission("rtupd.use")) {
+            sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getNoPermission()));
+            return true;
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             if (sender.hasPermission("rtupd.reload")) {
                 configManager.initConfigFiles();
                 sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getReloadMsg()));
             } else {
                 sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getNoPermission()));
             }
+            return true;
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("gui")) {
+            GUIManager.getInstance().openInventory(((Player) sender));
             return true;
         } else if (args.length >= 1 && configManager.getKeys().contains(args[0])) {
             if (args.length >= 2 && Bukkit.getPlayer(args[1]) != null) {

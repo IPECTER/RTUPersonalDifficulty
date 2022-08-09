@@ -5,5 +5,5 @@ commandWrongUsage: "&c잘못된 사용법&7, &f/rtupd &f{difficulties} 를 사�
 commandWrongUsageOp: "&c잘못된 사용법&7, &f/rtupd &freload&7/&f{difficulties} 를 사용하세요"
 commandWrongUsageConsole: "&c잘못된 사용법&7, &f이 명령어는 플레이어만 사용할 수 있습니다"
 noPermission: "&c당신은 권한이 없습니다"
-guiTitle: "난이도 메뉴"
+guiTitle: "&f난이도 메뉴"
 difficultyChanged: "&f당신의 난이도가 {difficulty}&f로 변경되었습니다"

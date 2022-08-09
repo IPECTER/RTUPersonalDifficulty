@@ -13,6 +13,9 @@ permissions:
   rtupd.reload:
     description: Plugin reload
     default: op
+  rtupd.gui:
+    description: Personal Difficulty GUI Using
+    default: true
   rtupd.use:
     description: Personal Difficulty Using
     default: true

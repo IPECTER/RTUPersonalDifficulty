@@ -20,7 +20,7 @@ public class ConfigManager {
     private boolean motd = true;
     private String locale = "EN";
     private Map<String, List<String>> cmdList = Collections.synchronizedMap(new HashMap<>());
-    private String prefix = IridiumColorAPI.process("<GRADIENT:9ba832>[ RTUCommandControl ]</GRADIENT:a3a3a3> ");
+    private String prefix = IridiumColorAPI.process("<GRADIENT:1f4dcc>[ RTUPersonalDifficulty ]</GRADIENT:a3a3a3> ");
     private String reloadMsg = "";
     private String commandWrongUsage = "";
     private String commandWrongUsageOp = "";
@@ -185,6 +185,7 @@ public class ConfigManager {
             keys = difficultySection.getKeys(false).stream().collect(Collectors.toList());
             for (String diff : difficultySection.getKeys(false)) {
                 Difficulty difficulty = new Difficulty();
+                difficulty.setDifficulty(keys.indexOf(diff));
                 difficulty.setName(diff);
                 difficulty.setDisplayName(difficultySection.getString(diff + ".display", "Default Name"));
                 difficulty.setMaterial(Material.getMaterial(difficultySection.getString(diff + ".gui.material", "WHITE_STAINED_GLASS")));
