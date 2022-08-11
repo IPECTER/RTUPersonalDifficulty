@@ -73,11 +73,17 @@ public class Command implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String alias, String[] args) {
         if (args.length == 1) {
             List<String> list = new ArrayList<>();
+            if (!sender.hasPermission("rtupd.use")) {
+                return list;
+            }
             if (sender.hasPermission("rtube.reload")) {
                 list.add("reload");
             }
             if (sender.hasPermission("rtupd.toggle")) {
                 list.addAll(configManager.getKeys());
+            }
+            if (sender.hasPermission("rtupd.gui")) {
+                list.add("gui");
             }
             return list;
         } else if (args.length == 2) {
