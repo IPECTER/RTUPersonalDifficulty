@@ -5,7 +5,7 @@ import com.github.ipecter.rtu.personaldifficulty.gui.listeners.InventoryClick;
 import com.github.ipecter.rtu.personaldifficulty.listeners.*;
 import com.github.ipecter.rtu.personaldifficulty.manager.ConfigManager;
 import com.github.ipecter.rtu.personaldifficulty.placeholderapi.Placeholders;
-import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
+import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,8 +17,8 @@ public final class RTUPersonalDifficulty extends JavaPlugin {
     @Override
     public void onEnable() {
         try {
-            RTUUtilAPI.init(this);
-            Bukkit.getLogger().info(RTUUtilAPI.getTextManager().formatted(prefix + "&aEnable&f!"));
+            RTUPluginLib.init(this);
+            Bukkit.getLogger().info(RTUPluginLib.getTextManager().formatted(prefix + "&aEnable&f!"));
             ConfigManager.getInstance().initConfigFiles();
             registerEvent();
             setExecutor();
@@ -31,7 +31,7 @@ public final class RTUPersonalDifficulty extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.getLogger().info(RTUUtilAPI.getTextManager().formatted(prefix + "&cDisable&f!"));
+        Bukkit.getLogger().info(RTUPluginLib.getTextManager().formatted(prefix + "&cDisable&f!"));
     }
 
     protected void registerEvent() {
@@ -56,7 +56,7 @@ public final class RTUPersonalDifficulty extends JavaPlugin {
 
     private void loadPAPI() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            RTUUtilAPI.getDependencyManager().setUsePAPI(true);
+            RTUPluginLib.getDependencyManager().setUsePAPI(true);
             new Placeholders(this).register();
         }
     }

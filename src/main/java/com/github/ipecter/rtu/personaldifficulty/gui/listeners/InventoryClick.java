@@ -3,7 +3,7 @@ package com.github.ipecter.rtu.personaldifficulty.gui.listeners;
 import com.github.ipecter.rtu.personaldifficulty.gui.GUIManager;
 import com.github.ipecter.rtu.personaldifficulty.manager.ConfigManager;
 import com.github.ipecter.rtu.personaldifficulty.manager.DifficultyManager;
-import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
+import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +22,7 @@ public class InventoryClick implements Listener {
             Player player = (Player) e.getWhoClicked();
             difficultyManager.setDifficulty(player, e.getSlot());
             String name = difficultyManager.getDifficulty(player).getDisplayName();
-            player.sendMessage(RTUUtilAPI.getTextManager().formatted(player, configManager.getPrefix() + configManager.getDifficultyChanged().replace("{difficulty}", name)));
+            player.sendMessage(RTUPluginLib.getTextManager().formatted(player, configManager.getTranslation("prefix") + configManager.getDifficultyChanged().replace("{difficulty}", name)));
         }
     }
 }

@@ -2,7 +2,7 @@ package com.github.ipecter.rtu.personaldifficulty.manager;
 
 import com.github.ipecter.rtu.personaldifficulty.Difficulty;
 import com.github.ipecter.rtu.personaldifficulty.RTUPersonalDifficulty;
-import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
+import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -21,15 +21,9 @@ public class ConfigManager {
     private String locale = "EN";
     private Map<String, List<String>> cmdList = Collections.synchronizedMap(new HashMap<>());
     private String prefix = IridiumColorAPI.process("<GRADIENT:1f4dcc>[ RTUPersonalDifficulty ]</GRADIENT:a3a3a3> ");
-    private String reloadMsg = "";
-    private String commandWrongUsage = "";
-    private String commandWrongUsageOp = "";
-    private String commandWrongUsageConsole = "";
-    private String noPermission = "";
-    private String guiTitle = "";
-    private String difficultyChanged = "";
     private List<String> mobList = Collections.synchronizedList(new ArrayList<>());
     private List<String> keys = Collections.synchronizedList(new ArrayList<>());
+    private DifficultyManager manager = DifficultyManager.getInstance();
 
     public ConfigManager() {
     }
@@ -70,72 +64,6 @@ public class ConfigManager {
         this.cmdList = cmdList;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public String getReloadMsg() {
-        return reloadMsg;
-    }
-
-    public void setReloadMsg(String reloadMsg) {
-        this.reloadMsg = reloadMsg;
-    }
-
-    public String getCommandWrongUsage() {
-        return commandWrongUsage;
-    }
-
-    public void setCommandWrongUsage(String commandWrongUsage) {
-        this.commandWrongUsage = commandWrongUsage;
-    }
-
-    private DifficultyManager manager = DifficultyManager.getInstance();
-
-    public String getCommandWrongUsageOp() {
-        return commandWrongUsageOp;
-    }
-
-    public void setCommandWrongUsageOp(String commandWrongUsageOp) {
-        this.commandWrongUsageOp = commandWrongUsageOp;
-    }
-
-    public String getCommandWrongUsageConsole() {
-        return commandWrongUsageConsole;
-    }
-
-    public String getNoPermission() {
-        return noPermission;
-    }
-
-    public void setNoPermission(String noPermission) {
-        this.noPermission = noPermission;
-    }
-
-    public void setCommandWrongUsageConsole(String commandWrongUsageConsole) {
-        this.commandWrongUsageConsole = commandWrongUsageConsole;
-    }
-
-    public String getGuiTitle() {
-        return guiTitle;
-    }
-
-    public void setGuiTitle(String guiTitle) {
-        this.guiTitle = guiTitle;
-    }
-
-    public String getDifficultyChanged() {
-        return difficultyChanged;
-    }
-
-    public void setDifficultyChanged(String difficultyChanged) {
-        this.difficultyChanged = difficultyChanged;
-    }
-
     public List<String> getMobList() {
         return mobList;
     }
@@ -145,10 +73,10 @@ public class ConfigManager {
     }
 
     public void initConfigFiles() {
-        initSetting(RTUUtilAPI.getFileManager().copyResource("Setting.yml"));
-        initMessage(RTUUtilAPI.getFileManager().copyResource("Translations", "Locale_" + locale + ".yml"));
-        initDfficult(RTUUtilAPI.getFileManager().copyResource("Difficulty.yml"));
-        initMobList(RTUUtilAPI.getFileManager().copyResource("MobList.yml"));
+        initSetting(RTUPluginLib.getFileManager().copyResource("Setting.yml"));
+        initMessage(RTUPluginLib.getFileManager().copyResource("Translations", "Locale_" + locale + ".yml"));
+        initDfficult(RTUPluginLib.getFileManager().copyResource("Difficulty.yml"));
+        initMobList(RTUPluginLib.getFileManager().copyResource("MobList.yml"));
     }
 
     private void initSetting(File file) {
@@ -164,17 +92,16 @@ public class ConfigManager {
 
     private void initMessage(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        prefix = config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix");
-        reloadMsg = config.getString("reloadMsg");
-        commandWrongUsage = config.getString("commandWrongUsage");
-        commandWrongUsageOp = config.getString("commandWrongUsageOp");
-        commandWrongUsageConsole = config.getString("commandWrongUsageConsole");
-        noPermission = config.getString("noPermission");
-        guiTitle = config.getString("guiTitle");
-        difficultyChanged = config.getString("difficultyChanged");
+        for (String key : config.getKeys(false)) {
+            if (key.equals("prefix")) {
+                msgKeyMap.put(key, config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix"));
+            } else {
+                msgKeyMap.put(key, config.getString(key));
+            }
+        }
 
-        RTUUtilAPI.getFileManager().copyResource("Translations", "Locale_EN.yml");
-        RTUUtilAPI.getFileManager().copyResource("Translations", "Locale_KR.yml");
+        RTUPluginLib.getFileManager().copyResource("Translations", "Locale_EN.yml");
+        RTUPluginLib.getFileManager().copyResource("Translations", "Locale_KR.yml");
     }
 
     private void initDfficult(File file) {
@@ -211,6 +138,12 @@ public class ConfigManager {
     private void initMobList(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         mobList.addAll(config.getStringList("list"));
+    }
+
+    private Map<String, String> msgKeyMap = Collections.synchronizedMap(new HashMap<>());
+
+    public String getTranslation(String key) {
+        return msgKeyMap.getOrDefault(key, "");
     }
 
     private static class InnerInstanceClass {

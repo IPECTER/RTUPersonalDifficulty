@@ -1,7 +1,8 @@
 package com.github.ipecter.rtu.personaldifficulty.manager;
 
 import com.github.ipecter.rtu.personaldifficulty.Difficulty;
-import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
+import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
+import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -32,7 +33,7 @@ public class DifficultyManager {
         UUID uuid = player.getUniqueId();
         Difficulty difficulty = playerCache.get(uuid);
         if (difficulty == null) {
-            String value = RTUUtilAPI.getStatusManager().getStatus(player, "difficulty");
+            String value = RTUPluginLib.getStatusManager().getStatus(player, "difficulty");
             int index = value != null ? Integer.valueOf(value) : defaultDifficulty;
             difficulty = difficulties.get(index);
             playerCache.put(uuid, difficulty);
@@ -44,7 +45,7 @@ public class DifficultyManager {
         if (value >= difficulties.size())
             throw new IllegalArgumentException("A difficulty with value " + value + " is not registered");
         Difficulty difficulty = difficulties.get(value);
-        RTUUtilAPI.getStatusManager().setStatus(player, "difficulty", difficulty.getDifficulty());
+        RTUPluginLib.getStatusManager().setStatus(player, "difficulty", difficulty.getDifficulty());
         playerCache.put(player.getUniqueId(), difficulty);
     }
 

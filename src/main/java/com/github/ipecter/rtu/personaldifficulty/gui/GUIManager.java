@@ -3,7 +3,7 @@ package com.github.ipecter.rtu.personaldifficulty.gui;
 import com.github.ipecter.rtu.personaldifficulty.Difficulty;
 import com.github.ipecter.rtu.personaldifficulty.manager.ConfigManager;
 import com.github.ipecter.rtu.personaldifficulty.manager.DifficultyManager;
-import com.github.ipecter.rtu.utilapi.RTUUtilAPI;
+import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -17,7 +17,7 @@ public class GUIManager {
 
     private ConfigManager configManager = ConfigManager.getInstance();
     private DifficultyManager difficultyManager = DifficultyManager.getInstance();
-    private String title = RTUUtilAPI.getTextManager().colored(configManager.getPrefix() + configManager.getGuiTitle());
+    private String title = RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
 
     public GUIManager() {
     }
@@ -61,8 +61,8 @@ public class GUIManager {
 
     private ItemStack createItem(ItemStack item, String name, List<String> lore) {
         ItemMeta im = item.getItemMeta();
-        im.setDisplayName(RTUUtilAPI.getTextManager().colored(name));
-        im.setLore(lore.stream().map(s -> RTUUtilAPI.getTextManager().colored(s)).collect(Collectors.toList()));
+        im.setDisplayName(RTUPluginLib.getTextManager().colored(name));
+        im.setLore(lore.stream().map(s -> RTUPluginLib.getTextManager().colored(s)).collect(Collectors.toList()));
         item.setItemMeta(im);
         return item;
     }
