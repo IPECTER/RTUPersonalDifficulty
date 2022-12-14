@@ -66,7 +66,7 @@ difficulties:
       material:
       customModelData:
       description:
-        - 'GUI will be updated soon.'
+        - '&a&lEasy &7Difficulty'
     fallDamageMultiplier: 1.0
     fireDamageMultiplier: 1.0
     suffocationDamageMultiplier: 1.0
@@ -87,7 +87,7 @@ difficulties:
       material:
       customModelData:
       description:
-        - 'GUI will be updated soon.'
+        - '&e&lNormal &7Difficulty'
     fallDamageMultiplier: 1.0
     fireDamageMultiplier: 1.0
     suffocationDamageMultiplier: 1.0
@@ -108,7 +108,7 @@ difficulties:
       material:
       customModelData:
       description:
-        - 'GUI will be updated soon.'
+        - '&c&lHard &7Difficulty'
     fallDamageMultiplier: 1.0
     fireDamageMultiplier: 1.0
     suffocationDamageMultiplier: 1.0
@@ -129,7 +129,7 @@ difficulties:
       material:
       customModelData:
       description:
-        - 'GUI will be updated soon.'
+        - '&4&lHardcore &7Difficulty'
     fallDamageMultiplier: 1.0
     fireDamageMultiplier: 1.0
     suffocationDamageMultiplier: 1.0
@@ -145,12 +145,12 @@ difficulties:
 
   #Number: 5
   peaceful:
-    display: '&b&lPeaceful'
+    display: '&4&lHardcore &b&lPeaceful'
     gui:
       material:
       customModelData:
       description:
-        - 'GUI will be updated soon.'
+        - ' &7Difficulty'
     fallDamageMultiplier: 1.0
     fireDamageMultiplier: 1.0
     suffocationDamageMultiplier: 1.0

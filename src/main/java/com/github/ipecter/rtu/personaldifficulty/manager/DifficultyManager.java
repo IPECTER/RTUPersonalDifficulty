@@ -2,7 +2,6 @@ package com.github.ipecter.rtu.personaldifficulty.manager;
 
 import com.github.ipecter.rtu.personaldifficulty.Difficulty;
 import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
-import com.github.ipecter.rtu.pluginlib.RTUPluginLib;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -18,7 +17,7 @@ public class DifficultyManager {
     }
 
     public final static DifficultyManager getInstance() {
-        return DifficultyManager.DifficultyManagerClass.instance;
+        return DifficultyManagerClass.instance;
     }
 
     public void registerDifficulty(Difficulty difficulty) {

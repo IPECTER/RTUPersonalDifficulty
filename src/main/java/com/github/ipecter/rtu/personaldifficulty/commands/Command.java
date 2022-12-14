@@ -24,14 +24,14 @@ public class Command implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (!sender.hasPermission("rtupd.use")) {
-            sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("noPermission")));
+            sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getNoPermission()));
             return true;
         } else if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             if (sender.hasPermission("rtupd.reload")) {
                 configManager.initConfigFiles();
-                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("reloadMsg")));
+                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getReloadMsg()));
             } else {
-                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("noPermission")));
+                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getNoPermission()));
             }
             return true;
         } else if (args.length == 1 && args[0].equalsIgnoreCase("gui")) {
@@ -41,25 +41,25 @@ public class Command implements CommandExecutor, TabCompleter {
             if (args.length >= 2 && Bukkit.getPlayer(args[1]) != null) {
                 if (sender.hasPermission("rtupd.toggle.other")) {
                     setDifficulty(Bukkit.getPlayer(args[1]), args[0]);
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + "&f" + args[1] + configManager.getTranslation("difficultyChanged").replace("{difficulty}", args[0])));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + "&f" + args[1] + configManager.getDifficultyChanged().replace("{difficulty}", args[0])));
                 } else {
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("noPermission")));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getNoPermission()));
                 }
             } else {
                 if (sender instanceof Player) {
                     setDifficulty((Player) sender, args[0]);
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("difficultyChanged").replace("{difficulty}", args[0])));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getDifficultyChanged().replace("{difficulty}", args[0])));
                 } else {
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("commandWrongUsageConsole")));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getCommandWrongUsageConsole()));
                 }
             }
             return true;
         } else {
-            if (sender.hasPermission("rtube.reload")) {
-                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("commandWrongUsageOp").replace("{difficulties}", String.join("&7/&f", configManager.getKeys()))));
+            if (sender.hasPermission("rtupd.reload")) {
+                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getCommandWrongUsageOp().replace("{difficulties}", String.join("&7/&f", configManager.getKeys()))));
 
             } else {
-                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("commandWrongUsage").replace("{difficulties}", String.join("&7/&f", configManager.getKeys()))));
+                sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getCommandWrongUsage().replace("{difficulties}", String.join("&7/&f", configManager.getKeys()))));
             }
             return true;
         }
@@ -76,7 +76,7 @@ public class Command implements CommandExecutor, TabCompleter {
             if (!sender.hasPermission("rtupd.use")) {
                 return list;
             }
-            if (sender.hasPermission("rtube.reload")) {
+            if (sender.hasPermission("rtupd.reload")) {
                 list.add("reload");
             }
             if (sender.hasPermission("rtupd.toggle")) {

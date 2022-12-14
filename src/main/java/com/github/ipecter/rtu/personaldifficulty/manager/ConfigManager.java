@@ -21,16 +21,20 @@ public class ConfigManager {
     private String locale = "EN";
     private Map<String, List<String>> cmdList = Collections.synchronizedMap(new HashMap<>());
     private String prefix = IridiumColorAPI.process("<GRADIENT:1f4dcc>[ RTUPersonalDifficulty ]</GRADIENT:a3a3a3> ");
+    private String reloadMsg = "";
+    private String commandWrongUsage = "";
+    private String commandWrongUsageOp = "";
+    private String commandWrongUsageConsole = "";
+    private String noPermission = "";
+    private String guiTitle = "";
+    private String difficultyChanged = "";
     private List<String> mobList = Collections.synchronizedList(new ArrayList<>());
     private List<String> keys = Collections.synchronizedList(new ArrayList<>());
-    private DifficultyManager manager = DifficultyManager.getInstance();
 
     public ConfigManager() {
     }
 
-    public final static ConfigManager getInstance() {
-        return ConfigManager.InnerInstanceClass.instance;
-    }
+    private DifficultyManager manager = DifficultyManager.getInstance();
 
     public boolean isEnablePlugin() {
         return enablePlugin;
@@ -64,6 +68,74 @@ public class ConfigManager {
         this.cmdList = cmdList;
     }
 
+    public final static ConfigManager getInstance() {
+        return InnerInstanceClass.instance;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getReloadMsg() {
+        return reloadMsg;
+    }
+
+    public void setReloadMsg(String reloadMsg) {
+        this.reloadMsg = reloadMsg;
+    }
+
+    public String getCommandWrongUsage() {
+        return commandWrongUsage;
+    }
+
+    public void setCommandWrongUsage(String commandWrongUsage) {
+        this.commandWrongUsage = commandWrongUsage;
+    }
+
+    public String getCommandWrongUsageOp() {
+        return commandWrongUsageOp;
+    }
+
+    public void setCommandWrongUsageOp(String commandWrongUsageOp) {
+        this.commandWrongUsageOp = commandWrongUsageOp;
+    }
+
+    public String getCommandWrongUsageConsole() {
+        return commandWrongUsageConsole;
+    }
+
+    public void setCommandWrongUsageConsole(String commandWrongUsageConsole) {
+        this.commandWrongUsageConsole = commandWrongUsageConsole;
+    }
+
+    public String getNoPermission() {
+        return noPermission;
+    }
+
+    public void setNoPermission(String noPermission) {
+        this.noPermission = noPermission;
+    }
+
+    public String getGuiTitle() {
+        return guiTitle;
+    }
+
+    public void setGuiTitle(String guiTitle) {
+        this.guiTitle = guiTitle;
+    }
+
+    public String getDifficultyChanged() {
+        return difficultyChanged;
+    }
+
+    public void setDifficultyChanged(String difficultyChanged) {
+        this.difficultyChanged = difficultyChanged;
+    }
+
     public List<String> getMobList() {
         return mobList;
     }
@@ -92,13 +164,14 @@ public class ConfigManager {
 
     private void initMessage(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        for (String key : config.getKeys(false)) {
-            if (key.equals("prefix")) {
-                msgKeyMap.put(key, config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix"));
-            } else {
-                msgKeyMap.put(key, config.getString(key));
-            }
-        }
+        prefix = config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix");
+        reloadMsg = config.getString("reloadMsg");
+        commandWrongUsage = config.getString("commandWrongUsage");
+        commandWrongUsageOp = config.getString("commandWrongUsageOp");
+        commandWrongUsageConsole = config.getString("commandWrongUsageConsole");
+        noPermission = config.getString("noPermission");
+        guiTitle = config.getString("guiTitle");
+        difficultyChanged = config.getString("difficultyChanged");
 
         RTUPluginLib.getFileManager().copyResource("Translations", "Locale_EN.yml");
         RTUPluginLib.getFileManager().copyResource("Translations", "Locale_KR.yml");
@@ -138,12 +211,6 @@ public class ConfigManager {
     private void initMobList(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         mobList.addAll(config.getStringList("list"));
-    }
-
-    private Map<String, String> msgKeyMap = Collections.synchronizedMap(new HashMap<>());
-
-    public String getTranslation(String key) {
-        return msgKeyMap.getOrDefault(key, "");
     }
 
     private static class InnerInstanceClass {

@@ -17,13 +17,13 @@ public class GUIManager {
 
     private ConfigManager configManager = ConfigManager.getInstance();
     private DifficultyManager difficultyManager = DifficultyManager.getInstance();
-    private String title = RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
+    private String title = RTUPluginLib.getTextManager().colored(configManager.getPrefix() + configManager.getGuiTitle());
 
     public GUIManager() {
     }
 
     public final static GUIManager getInstance() {
-        return GUIManager.GUIManagerClass.instance;
+        return GUIManagerClass.instance;
     }
 
     public void openInventory(Player player) {
@@ -53,16 +53,17 @@ public class GUIManager {
         }
         for (Difficulty difficulty : difficultyManager.getDifficulties()) {
             ItemStack itemStack = new ItemStack(difficulty.getMaterial());
-            createItem(itemStack, difficulty.getDisplayName(), difficulty.getDescription());
+            createItem(difficulty, itemStack, difficulty.getDisplayName(), difficulty.getDescription());
             inv.setItem(difficulty.getDifficulty(), itemStack);
         }
         return inv;
     }
 
-    private ItemStack createItem(ItemStack item, String name, List<String> lore) {
+    private ItemStack createItem(Difficulty difficulty, ItemStack item, String name, List<String> lore) {
         ItemMeta im = item.getItemMeta();
         im.setDisplayName(RTUPluginLib.getTextManager().colored(name));
         im.setLore(lore.stream().map(s -> RTUPluginLib.getTextManager().colored(s)).collect(Collectors.toList()));
+        im.setCustomModelData(difficulty.getCustomModelData());
         item.setItemMeta(im);
         return item;
     }
