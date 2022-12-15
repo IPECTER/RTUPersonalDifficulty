@@ -48,7 +48,7 @@ public class Command implements CommandExecutor, TabCompleter {
             } else {
                 if (sender instanceof Player) {
                     setDifficulty((Player) sender, args[0]);
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + "&f" + args[1] + configManager.getDifficultyChanged().replace("{difficulty}", args[0])));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + "&f" + ((Player) sender).getName() + configManager.getDifficultyChanged().replace("{difficulty}", args[0])));
                 } else {
                     sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getPrefix() + configManager.getCommandWrongUsageConsole()));
                 }
