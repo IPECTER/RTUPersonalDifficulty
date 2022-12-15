@@ -145,12 +145,12 @@ difficulties:
 
   #Number: 5
   peaceful:
-    display: '&4&lHardcore &b&lPeaceful'
+    display: '&b&lPeaceful'
     gui:
       material:
       customModelData:
       description:
-        - ' &7Difficulty'
+        - ' &b&lPeaceful &7Difficulty'
     fallDamageMultiplier: 1.0
     fireDamageMultiplier: 1.0
     suffocationDamageMultiplier: 1.0
