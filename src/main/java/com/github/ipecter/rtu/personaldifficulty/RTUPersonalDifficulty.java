@@ -36,13 +36,13 @@ public final class RTUPersonalDifficulty extends JavaPlugin {
 
     protected void registerEvent() {
         Bukkit.getPluginManager().registerEvents(new EntityDeath(), this);
+        Bukkit.getPluginManager().registerEvents(new EntityTargetPlayer(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDamage(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDamageByEntity(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerFoodLevelChange(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerPotionEffect(), this);
-
         Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
     }
 
