@@ -17,7 +17,7 @@ public class EntityTargetPlayer implements Listener {
 
         if (!configManager.isEnablePlugin()) return;
         if (event.getTarget() instanceof Player) {
-            Player player = (Player) event.getEntity();
+            Player player = (Player) event.getTarget();
             if (player != null) {
                 Difficulty difficulty = DifficultyManager.getInstance().getDifficulty(player);
                 if (difficulty.isMonsterIgnorePlayer()) {
