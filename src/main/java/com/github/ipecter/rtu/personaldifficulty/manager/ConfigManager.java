@@ -31,9 +31,6 @@ public class ConfigManager {
     private List<String> mobList = Collections.synchronizedList(new ArrayList<>());
     private List<String> keys = Collections.synchronizedList(new ArrayList<>());
 
-    public ConfigManager() {
-    }
-
     private DifficultyManager manager = DifficultyManager.getInstance();
 
     public boolean isEnablePlugin() {
@@ -68,74 +65,6 @@ public class ConfigManager {
         this.cmdList = cmdList;
     }
 
-    public final static ConfigManager getInstance() {
-        return InnerInstanceClass.instance;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public String getReloadMsg() {
-        return reloadMsg;
-    }
-
-    public void setReloadMsg(String reloadMsg) {
-        this.reloadMsg = reloadMsg;
-    }
-
-    public String getCommandWrongUsage() {
-        return commandWrongUsage;
-    }
-
-    public void setCommandWrongUsage(String commandWrongUsage) {
-        this.commandWrongUsage = commandWrongUsage;
-    }
-
-    public String getCommandWrongUsageOp() {
-        return commandWrongUsageOp;
-    }
-
-    public void setCommandWrongUsageOp(String commandWrongUsageOp) {
-        this.commandWrongUsageOp = commandWrongUsageOp;
-    }
-
-    public String getCommandWrongUsageConsole() {
-        return commandWrongUsageConsole;
-    }
-
-    public void setCommandWrongUsageConsole(String commandWrongUsageConsole) {
-        this.commandWrongUsageConsole = commandWrongUsageConsole;
-    }
-
-    public String getNoPermission() {
-        return noPermission;
-    }
-
-    public void setNoPermission(String noPermission) {
-        this.noPermission = noPermission;
-    }
-
-    public String getGuiTitle() {
-        return guiTitle;
-    }
-
-    public void setGuiTitle(String guiTitle) {
-        this.guiTitle = guiTitle;
-    }
-
-    public String getDifficultyChanged() {
-        return difficultyChanged;
-    }
-
-    public void setDifficultyChanged(String difficultyChanged) {
-        this.difficultyChanged = difficultyChanged;
-    }
-
     public List<String> getMobList() {
         return mobList;
     }
@@ -162,23 +91,39 @@ public class ConfigManager {
         return keys;
     }
 
+    private Map<String, String> msgKeyMap = Collections.synchronizedMap(new HashMap<>());
+
+    public final static ConfigManager getInstance() {
+        return InnerInstanceClass.instance;
+    }
+
+    public String getTranslation(String key) {
+        return msgKeyMap.getOrDefault(key, "");
+    }
+
     private void initMessage(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        prefix = config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix");
-        reloadMsg = config.getString("reloadMsg");
-        commandWrongUsage = config.getString("commandWrongUsage");
-        commandWrongUsageOp = config.getString("commandWrongUsageOp");
-        commandWrongUsageConsole = config.getString("commandWrongUsageConsole");
-        noPermission = config.getString("noPermission");
-        guiTitle = config.getString("guiTitle");
-        difficultyChanged = config.getString("difficultyChanged");
+        for (String key : config.getKeys(false)) {
+            if (key.equals("prefix")) {
+                msgKeyMap.put(key, config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix"));
+            } else {
+                msgKeyMap.put(key, config.getString(key));
+            }
+        }
 
         RTUPluginLib.getFileManager().copyResource("Translations", "Locale_EN.yml");
         RTUPluginLib.getFileManager().copyResource("Translations", "Locale_KR.yml");
     }
 
+    private void initMobList(File file) {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        mobList.addAll(config.getStringList("list"));
+    }
+
     private void initDfficult(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        manager.clearDifficulties();
+        manager.flushCache();
         manager.setDefaultDifficulty(config.getInt("defaultDifficulty", 0));
         ConfigurationSection difficultySection = config.getConfigurationSection("difficulties");
         if (config.getConfigurationSection("difficulties") != null) {
@@ -206,11 +151,6 @@ public class ConfigManager {
                 manager.registerDifficulty(difficulty);
             }
         }
-    }
-
-    private void initMobList(File file) {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        mobList.addAll(config.getStringList("list"));
     }
 
     private static class InnerInstanceClass {

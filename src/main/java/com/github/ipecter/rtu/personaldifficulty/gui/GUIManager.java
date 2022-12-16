@@ -17,7 +17,7 @@ public class GUIManager {
 
     private ConfigManager configManager = ConfigManager.getInstance();
     private DifficultyManager difficultyManager = DifficultyManager.getInstance();
-    private String title = RTUPluginLib.getTextManager().colored(configManager.getPrefix() + configManager.getGuiTitle());
+    private String title = RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
 
     public GUIManager() {
     }

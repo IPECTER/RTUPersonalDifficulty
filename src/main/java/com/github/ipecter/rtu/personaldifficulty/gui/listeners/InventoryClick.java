@@ -22,7 +22,7 @@ public class InventoryClick implements Listener {
             Player player = (Player) e.getWhoClicked();
             difficultyManager.setDifficulty(player, e.getSlot());
             String name = difficultyManager.getDifficulty(player).getDisplayName();
-            player.sendMessage(RTUPluginLib.getTextManager().formatted(player, configManager.getPrefix() + configManager.getDifficultyChanged().replace("{difficulty}", name)));
+            player.sendMessage(RTUPluginLib.getTextManager().formatted(player, configManager.getTranslation("prefix") + configManager.getTranslation("difficultyChanged").replace("{difficulty}", name)));
         }
     }
 }

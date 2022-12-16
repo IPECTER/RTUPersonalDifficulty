@@ -13,9 +13,6 @@ public class DifficultyManager {
     private Set<String> d = new HashSet<>();
     private int defaultDifficulty = 0;
 
-    public DifficultyManager() {
-    }
-
     public final static DifficultyManager getInstance() {
         return DifficultyManagerClass.instance;
     }
