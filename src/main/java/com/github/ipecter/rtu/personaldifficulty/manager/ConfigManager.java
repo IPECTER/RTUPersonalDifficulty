@@ -21,13 +21,6 @@ public class ConfigManager {
     private String locale = "EN";
     private Map<String, List<String>> cmdList = Collections.synchronizedMap(new HashMap<>());
     private String prefix = IridiumColorAPI.process("<GRADIENT:1f4dcc>[ RTUPersonalDifficulty ]</GRADIENT:a3a3a3> ");
-    private String reloadMsg = "";
-    private String commandWrongUsage = "";
-    private String commandWrongUsageOp = "";
-    private String commandWrongUsageConsole = "";
-    private String noPermission = "";
-    private String guiTitle = "";
-    private String difficultyChanged = "";
     private List<String> mobList = Collections.synchronizedList(new ArrayList<>());
     private List<String> keys = Collections.synchronizedList(new ArrayList<>());
 
