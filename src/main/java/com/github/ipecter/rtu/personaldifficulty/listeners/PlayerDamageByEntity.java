@@ -39,5 +39,4 @@ public class PlayerDamageByEntity implements Listener {
         }
 
     }
-
 }

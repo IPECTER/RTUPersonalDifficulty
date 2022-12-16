@@ -25,5 +25,4 @@ public class PlayerDeath implements Listener {
         }
 
     }
-
 }

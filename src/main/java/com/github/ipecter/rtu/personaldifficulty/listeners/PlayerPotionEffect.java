@@ -42,5 +42,4 @@ public class PlayerPotionEffect implements Listener {
         }
 
     }
-
 }

@@ -25,5 +25,4 @@ public class PlayerFoodLevelChange implements Listener {
         }
 
     }
-
 }

@@ -6,21 +6,24 @@ import com.github.ipecter.rtu.personaldifficulty.manager.DifficultyManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTargetEvent;
 
-public class EntityDeath implements Listener {
+public class EntityTargetPlayer implements Listener {
 
     private ConfigManager configManager = ConfigManager.getInstance();
 
     @EventHandler
-    public void onMobDeath(EntityDeathEvent event) {
+    public void onTarget(EntityTargetEvent event) {
 
         if (!configManager.isEnablePlugin()) return;
-        if (event.getEntity().getKiller() instanceof Player) {
-            Player player = event.getEntity().getKiller();
+        if (event.getTarget() instanceof Player) {
+            Player player = (Player) event.getEntity();
             if (player != null) {
                 Difficulty difficulty = DifficultyManager.getInstance().getDifficulty(player);
-                event.setDroppedExp((int) Math.round(event.getDroppedExp() * difficulty.getExpMultiplier()));
+                if (difficulty.isMonsterIgnorePlayer()) {
+                    event.setCancelled(true);
+                    event.setTarget(null);
+                }
             }
         }
 

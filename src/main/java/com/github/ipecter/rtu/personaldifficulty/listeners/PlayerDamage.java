@@ -14,6 +14,7 @@ public class PlayerDamage implements Listener {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
+
         if (!configManager.isEnablePlugin()) return;
         if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
@@ -29,5 +30,4 @@ public class PlayerDamage implements Listener {
         }
 
     }
-
 }
