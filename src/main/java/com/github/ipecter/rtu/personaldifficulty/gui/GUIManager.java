@@ -17,7 +17,6 @@ public class GUIManager {
 
     private ConfigManager configManager = ConfigManager.getInstance();
     private DifficultyManager difficultyManager = DifficultyManager.getInstance();
-    private String title = RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
 
     public GUIManager() {
     }
@@ -31,12 +30,13 @@ public class GUIManager {
     }
 
     public String getTitle() {
-        return title;
+        return RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
     }
 
 
     private Inventory getInventory() {
         Inventory inv;
+        String title = RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
         int size = difficultyManager.getDifficulties().size();
         if (size <= 9) {
             inv = Bukkit.createInventory(null, 9, title);

@@ -41,14 +41,14 @@ public class Command implements CommandExecutor, TabCompleter {
             if (args.length >= 2 && Bukkit.getPlayer(args[1]) != null) {
                 if (sender.hasPermission("rtupd.toggle.other")) {
                     setDifficulty(Bukkit.getPlayer(args[1]), args[0]);
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + "&f" + args[1] + configManager.getTranslation("difficultyOtherChanged").replace("{difficulty}", args[0])));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + "&f" + args[1] + configManager.getTranslation("difficultyOtherChanged").replace("{difficulty}", getDifficulty(args[0]))));
                 } else {
                     sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("noPermission")));
                 }
             } else {
                 if (sender instanceof Player) {
                     setDifficulty((Player) sender, args[0]);
-                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + "&f" + ((Player) sender).getName() + configManager.getTranslation("difficultyOtherChanged").replace("{difficulty}", args[0])));
+                    sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + "&f" + configManager.getTranslation("difficultyChanged").replace("{difficulty}", getDifficulty(args[0]))));
                 } else {
                     sender.sendMessage(textManager.formatted(sender instanceof Player ? (Player) sender : null, configManager.getTranslation("prefix") + configManager.getTranslation("commandWrongUsageConsole")));
                 }
@@ -67,6 +67,10 @@ public class Command implements CommandExecutor, TabCompleter {
 
     private void setDifficulty(Player player, String name) {
         DifficultyManager.getInstance().setDifficulty(player, configManager.getKeys().indexOf(name));
+    }
+
+    private String getDifficulty(String name) {
+        return DifficultyManager.getInstance().getDifficulties().get(configManager.getKeys().indexOf(name)).getDisplayName();
     }
 
     @Override
