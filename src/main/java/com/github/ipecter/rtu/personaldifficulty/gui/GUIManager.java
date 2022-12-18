@@ -29,8 +29,8 @@ public class GUIManager {
         player.openInventory(getInventory(player));
     }
 
-    public String getTitle() {
-        return RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
+    public String getTitle(Player player) {
+        return RTUPluginLib.getTextManager().formatted(player, configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
     }
 
 
