@@ -26,7 +26,7 @@ public class GUIManager {
     }
 
     public void openInventory(Player player) {
-        player.openInventory(getInventory());
+        player.openInventory(getInventory(player));
     }
 
     public String getTitle() {
@@ -34,9 +34,9 @@ public class GUIManager {
     }
 
 
-    private Inventory getInventory() {
+    private Inventory getInventory(Player player) {
         Inventory inv;
-        String title = RTUPluginLib.getTextManager().colored(configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
+        String title = RTUPluginLib.getTextManager().formatted(player, configManager.getTranslation("prefix") + configManager.getTranslation("guiTitle"));
         int size = difficultyManager.getDifficulties().size();
         if (size <= 9) {
             inv = Bukkit.createInventory(null, 9, title);
