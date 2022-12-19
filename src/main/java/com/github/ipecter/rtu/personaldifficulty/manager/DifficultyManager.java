@@ -31,7 +31,7 @@ public class DifficultyManager {
         if (difficulty == null) {
             String value = RTUPluginLib.getStatusManager().getStatus(player, "difficulty");
             int index = value != null ? Integer.valueOf(value) : defaultDifficulty;
-            difficulty = difficulties.get(index);
+            difficulty = difficulties.get(index) != null ? difficulties.get(index) : difficulties.get(defaultDifficulty);
             playerCache.put(uuid, difficulty);
         }
         return difficulty;
