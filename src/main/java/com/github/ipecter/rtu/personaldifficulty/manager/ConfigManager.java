@@ -139,6 +139,7 @@ public class ConfigManager {
                 difficulty.setLoseHunger(difficultySection.getBoolean(diff + ".loseHunger", true));
                 difficulty.setEnableDebuffEffect(difficultySection.getBoolean(diff + ".debuffEffect", true));
                 difficulty.setMonsterIgnorePlayer(difficultySection.getBoolean(diff + ".monsterIgnorePlayer", false));
+                difficulty.setMonsterCounterAttackPlayer(difficultySection.getBoolean(diff + ".monsterCounterAttackPlayer", false));
                 difficulty.setEnableCreeperExplosionDamage(difficultySection.getBoolean(diff + ".creeperExplosionDamage", true));
                 difficulty.setClearAllWhenDie(difficultySection.getBoolean(diff + ".clearAllWhenDie", false));
                 manager.registerDifficulty(difficulty);

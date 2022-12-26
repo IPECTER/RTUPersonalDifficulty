@@ -32,6 +32,8 @@ public class Difficulty {
 
     private boolean monsterIgnorePlayer;
 
+    private boolean monsterCounterAttackPlayer;
+
     private boolean enableCreeperExplosionDamage;
 
     private boolean isClearAllWhenDie;
@@ -186,5 +188,13 @@ public class Difficulty {
 
     public void setMonsterIgnorePlayer(boolean monsterIgnorePlayer) {
         this.monsterIgnorePlayer = monsterIgnorePlayer;
+    }
+
+    public boolean isMonsterCounterAttackPlayer() {
+        return this.monsterCounterAttackPlayer && this.monsterIgnorePlayer;
+    }
+
+    public void setMonsterCounterAttackPlayer(boolean monsterCounterAttackPlayer) {
+        this.monsterCounterAttackPlayer = monsterCounterAttackPlayer && this.monsterIgnorePlayer;
     }
 }

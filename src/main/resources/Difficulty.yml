@@ -52,6 +52,9 @@ difficulties:
     #Whether monster ignore player / MobList.yml
     #몬스터 플레이어 무시 여부 / MobList.yml
     monsterIgnorePlayer: true
+    #Whether monster attack player when player attack monster / If monsterIgnorePlayer is true
+    #플레이어가 몬스터를 공격했을때 몬스터가 플레이어를 공격할지 / monsterIgnorePlayer가 true인 경우
+    monsterCounterAttackPlayer: false
     #Whether enable creeper explosion damage
     #크리퍼 폭발 데미지 적용 여부
     creeperExplosioDamage: false
@@ -77,6 +80,7 @@ difficulties:
     loseHunger: true
     debuffEffect: false
     monsterIgnorePlayer: false
+    monsterCounterAttackPlayer: false
     creeperExplosionDamage: true
     clearAllWhenDie: false
 
@@ -98,6 +102,7 @@ difficulties:
     loseHunger: true
     debuffEffect: true
     monsterIgnorePlayer: false
+    monsterCounterAttackPlayer: false
     creeperExplosionDamage: true
     clearAllWhenDie: false
 
@@ -119,6 +124,7 @@ difficulties:
     loseHunger: true
     debuffEffect: true
     monsterIgnorePlayer: false
+    monsterCounterAttackPlayer: false
     creeperExplosionDamage: true
     clearAllWhenDie: false
 
@@ -140,6 +146,7 @@ difficulties:
     loseHunger: true
     debuffEffect: true
     monsterIgnorePlayer: false
+    monsterCounterAttackPlayer: false
     creeperExplosionDamage: true
     clearAllWhenDie: true
 
@@ -161,5 +168,6 @@ difficulties:
     loseHunger: false
     debuffEffect: false
     monsterIgnorePlayer: true
+    monsterCounterAttackPlayer: false
     creeperExplosionDamage: false
     clearAllWhenDie: false
