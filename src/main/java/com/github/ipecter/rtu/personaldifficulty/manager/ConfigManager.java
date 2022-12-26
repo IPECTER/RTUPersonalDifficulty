@@ -96,6 +96,7 @@ public class ConfigManager {
 
     private void initMessage(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        msgKeyMap.clear();
         for (String key : config.getKeys(false)) {
             if (key.equals("prefix")) {
                 msgKeyMap.put(key, config.getString("prefix", "").isEmpty() ? prefix : config.getString("prefix"));
@@ -110,7 +111,10 @@ public class ConfigManager {
 
     private void initMobList(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        mobList.addAll(config.getStringList("list"));
+        mobList.clear();
+        for (String value : config.getStringList("list")) {
+            mobList.add(value.toUpperCase());
+        }
     }
 
     private void initDfficult(File file) {

@@ -19,13 +19,15 @@ public class EntityTargetPlayer implements Listener {
         if (event.getTarget() instanceof Player) {
             Player player = (Player) event.getTarget();
             if (player != null) {
-                Difficulty difficulty = DifficultyManager.getInstance().getDifficulty(player);
-                if (difficulty.isMonsterIgnorePlayer()) {
-                    if (difficulty.isMonsterCounterAttackPlayer()) {
-                        if (event.getReason() == EntityTargetEvent.TargetReason.TARGET_ATTACKED_ENTITY) return;
+                if (configManager.getMobList().contains(event.getEntity().getType().name().toUpperCase())) {
+                    Difficulty difficulty = DifficultyManager.getInstance().getDifficulty(player);
+                    if (difficulty.isMonsterIgnorePlayer()) {
+                        if (difficulty.isMonsterCounterAttackPlayer()) {
+                            if (event.getReason() == EntityTargetEvent.TargetReason.TARGET_ATTACKED_ENTITY) return;
+                        }
+                        event.setCancelled(true);
+                        event.setTarget(null);
                     }
-                    event.setCancelled(true);
-                    event.setTarget(null);
                 }
             }
         }
