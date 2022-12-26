@@ -111,9 +111,11 @@ public class ConfigManager {
 
     private void initMobList(File file) {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        mobList.clear();
-        for (String value : config.getStringList("list")) {
-            mobList.add(value.toUpperCase());
+        if (config.getConfigurationSection("list") != null) {
+            mobList.clear();
+            for (String value : config.getStringList("list")) {
+                mobList.add(value.toUpperCase());
+            }
         }
     }
 
